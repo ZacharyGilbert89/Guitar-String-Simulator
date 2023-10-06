@@ -4,28 +4,28 @@
 #include <iostream>
 #include <exception>
 CircularBuffer::CircularBuffer(int cap) {
-    if (cap < 1) {
+    if (cap < 1) { //checks to see if the capiacty is atleast initialized
         throw std::invalid_argument("CircularBuffer constructor: "
         "capacity must be greater than zero.");
     }
-    capacity = cap;
+    capacity = cap; //sets the capicity based off the parameters
     bufferSize = 0;
     _ringBuffer = new int16_t[cap];
 }
 int CircularBuffer::getCapacity() {
-    return capacity;
+    return capacity; //gets the capacity
 }
 int CircularBuffer::size() {
-    return bufferSize;
+    return bufferSize; //gets the buffersize
 }
-bool CircularBuffer::isEmpty() {
+bool CircularBuffer::isEmpty() { //check to see if the buffer is empty
     if (bufferSize == 0) {
         return true;
     } else {
         return false;
     }
 }
-bool CircularBuffer::isFull() {
+bool CircularBuffer::isFull() { //checks to see if the buffer is full
     if (bufferSize == capacity) {
         return true;
     } else {
@@ -33,17 +33,17 @@ bool CircularBuffer::isFull() {
     }
 }
 void CircularBuffer::enqueue(int16_t x) {
-    if (bufferSize == capacity) {
+    if (bufferSize == capacity) { //if the buffer is already full, we cannot proceed
         throw std::runtime_error("enqueue: can't enqueue to a full ring");
-    } else {
+    } else { //else increase the buffer size as we enqueue
         bufferSize++;
         _ringBuffer[bufferSize - 1] = x;
     }
 }
 int16_t CircularBuffer::dequeue() {
-    if (bufferSize == 0) {
+    if (bufferSize == 0) { //checks to see if the buffer is already empty
         throw std::runtime_error("dequeue: can't dequeue an empty ring");
-    } else {
+    } else {              //else we start clearing the buffer
         int16_t temp;
         temp = _ringBuffer[0];
         for (int i = 0; i < bufferSize; i++) {
@@ -54,9 +54,9 @@ int16_t CircularBuffer::dequeue() {
     }
 }
 int16_t CircularBuffer::peek() {
-    if (bufferSize == 0) {
+    if (bufferSize == 0) { //sees if the buffer is empty, if it is empty, we cannot return the peek
         throw std::runtime_error("peek: can't return peek from an empty ring");
     } else {
-        return _ringBuffer[0];
+        return _ringBuffer[0]; //we return the peek
     }
 }
