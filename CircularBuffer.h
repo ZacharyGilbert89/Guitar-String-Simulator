@@ -6,17 +6,17 @@
 class CircularBuffer {
  public:
     explicit CircularBuffer(int cap);
-    int size();
-    bool isEmpty();
-    bool isFull();
-    void enqueue(int16_t x);
-    int16_t dequeue();
-    int16_t peek();
-    int getCapacity();
+    int size(); //gets the size
+    bool isEmpty(); //sees if the buffer is empty or not
+    bool isFull();  //sees if the buffer is full or not
+    void enqueue(int16_t x); //function for enqueuing the buffer
+    int16_t dequeue(); //function to dequeue the buffer
+    int16_t peek(); //function to return the peek 
+    int getCapacity(); //function to get the capacity of the buffer
  private:
-    int capacity;
-    int bufferSize;
-    int16_t* _ringBuffer;
+    int capacity; //variable to keep track of the capacity
+    int bufferSize; //variable to keep track of the size of the buffer
+    int16_t* _ringBuffer; //Gets the buffer ring
 };
 
 #endif //NOLINT
